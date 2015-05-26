@@ -1,0 +1,87 @@
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="socket.io-1.3.5.js"></script>
+
+<style type="text/css">
+.window{
+	border: 1px solid rgb(195, 195, 195);
+	width: 800px;
+	height: 400px;
+	margin: auto;
+	top: 200px;
+}
+.code{
+	font: 11px Monaco, Courier New;
+	color: #ccc;
+	list-style: decimal;
+	margin: 0 0 1.5em 3em;
+}
+.code li {
+  padding: 3px 0;
+}
+.code li span{
+  color: #777;
+  font: 11px Monaco, Courier New;
+}
+.control{
+	border: 1px solid rgb(195, 195, 195);
+	width: 800px;
+	height: 30px;
+	margin: auto;	
+}
+</style>
+
+<div class="window">
+	<ol class="code" id="code">
+	</ol>
+</div>
+<div class="control">
+	<input type="text" name="nickname" id="nickname">
+	<button id="setNickname">输入昵称</button>
+</div>
+<div class="control">
+	<input type="text" name="message" id="message">
+	<button id="send">发送消息</button>
+</div>
+
+<script type="text/javascript">
+	var socket = io('http://localhost:3001/room/1001');
+	var token = null;
+	socket.on('connected', function (data){
+		$('#code').append('<li><span>连接成功！' + data.token + '</span></li>');
+		token = data.token;
+	});
+
+	socket.on('message', function (data){
+		$('#code').append('<li><span>' + data.nickname + ':' + data.msg + '</span></li>');
+	});
+
+	socket.on('leave', function (data){
+		$('#code').append('<li><span><strong>' + data.nickname + '</strong>离开房间</span></li>');		
+	})
+
+	socket.on('join', function (data){
+		$('#code').append('<li><span><strong>' + data.nickname + '</strong>加入房间</span></li>');			
+	})
+
+	function sendMessage(msg){
+		socket.emit('message',{
+			msg : msg,
+			token : token
+		});
+	}
+
+	function setNickname(nickname){
+		socket.emit('personalize',{
+			nickname: nickname,
+			token: token
+		});
+	}
+
+	$('#send').on("click", function (){
+		sendMessage($('#message').val());
+	});
+
+	$('#setNickname').on('click', function (){
+		setNickname($('#nickname').val());
+	});
+</script>
