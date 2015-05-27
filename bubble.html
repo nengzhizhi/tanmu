@@ -1,43 +1,71 @@
-<style type="text/css">
-body{
-	font-size: 6px;
-	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;	
-}
-.stage{
-	width: 800px;
-	height: 400px;
-	margin: auto;
-	border: 1px solid rgb(195, 195, 195);
-}
-.bubble{
-	position: absolute;
-	min-width: 100px;
-	max-width: 200px;
-	height: 20px;
-	line-height: 20px;
-	text-align: center;
-	background-color: #fff;
-	border: 4px solid #666;
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	border-radius: 30px;
-	-webkit-box-shadow: 2px 2px 4px #888;
-	-moz-box-shadow: 2px 2px 4px #888;
-	box-shadow: 2px 2px 4px #888;
-	opacity: 0.8;
-}
-.bubble:before{
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-	left: 40px;
-	top: 20px;
-	border: 10px solid;
-	border-color: #666 transparent transparent #666;	
-}
-</style>
-
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<style type="text/css">
+	body{
+		font-size: 10px;
+		font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;	
+	}
+	.stage{
+		width: 800px;
+		height: 400px;
+		margin: auto;
+		border: 1px solid rgb(195, 195, 195);
+	}
+	.bubble{
+		display: block;
+		position: absolute;
+		min-width: 100px;
+		max-width: 200px;
+		height: 20px;
+		line-height: 20px;
+		text-align: center;
+		background-color: #fff;
+		border: 4px solid #666;
+		-webkit-border-radius: 30px;
+		-moz-border-radius: 30px;
+		border-radius: 30px;
+		-webkit-box-shadow: 2px 2px 4px #888;
+		-moz-box-shadow: 2px 2px 4px #888;
+		box-shadow: 2px 2px 4px #888;
+		opacity: 0.8;
+	}
+	.bubble:before{
+		content: ' ';
+		position: absolute;
+		width: 0;
+		height: 0;
+		left: 40px;
+		top: 20px;
+		border: 10px solid;
+		border-color: #666 transparent transparent #666;	
+	}
+	.cinema{
+		width: 450px;
+		height: 150px;
+		margin: auto;
+		padding: 5px;
+		border: 1px solid rgb(195, 195, 195);
+	}
+	.seat{
+		width: 30px;
+		height: 30px;
+		border: 1px solid rgb(195, 195, 195);
+		margin: 5px;
+		float: left;	
+	}
+	.inputBox{
+		width: 460px;
+		height: 40px;
+		margin: auto;
+		line-height: 40px;
+		border: 1px solid rgb(195, 195, 195);
+	}
+	</style>
+</head>
+<body>
+<!--
 <div class="stage">
 	<div class="bubble" style="left:20px;top:10px;">
 		<span>好久不见啊！11111111111</span>
@@ -46,3 +74,52 @@ body{
 		<span>你们还好吗！1111111111111111</span>
 	</div>	
 </div>
+-->
+
+<div class="cinema">
+	<div class="seat" pos=1></div>
+	<div class="seat" pos=2></div>
+	<div class="seat" pos=3></div>
+	<div class="seat" pos=4></div>
+	<div class="seat" pos=5></div>
+	<div class="seat" pos=6></div>
+	<div class="seat" pos=7></div>
+	<div class="seat" pos=8></div>
+	<div class="seat" pos=9></div>
+	<div class="seat" pos=10></div>
+	<div class="seat" pos=11></div>
+	<div class="seat" pos=12></div>
+	<div class="seat" pos=13></div>
+	<div class="seat" pos=14></div>
+	<div class="seat" pos=15></div>
+	<div class="seat" pos=16></div>
+</div>
+
+<div class="inputBox">
+	<input type="text" id="message">
+	<button id="send">发送消息</button>
+</div>
+
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+	var pos = 0;
+	$('.seat').on('click', function(){
+		if(pos > 0){
+			$(".seat[pos=" + pos + "]").css("background", "#ffffff");
+		}
+		$(this).css("background", "#f5f5f5");
+		pos = $(this).attr('pos');
+	})
+
+
+	function bubbleMessage(pos, message){
+		$(".seat[pos=" + pos + "]").html('<div class="bubble"><span>'+ message +'</span></div>');
+	}
+
+	$('#send').on('click', function(){
+		bubbleMessage(pos,$('#message').val());
+	})
+</script>
+</body>
+</html>
