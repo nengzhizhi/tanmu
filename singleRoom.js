@@ -1,7 +1,7 @@
 var io = require('socket.io')();
 var uuid = require('node-uuid');
 
-
+/*
 module.exports = Room;
 
 function Room(opts){
@@ -24,8 +24,8 @@ Server.prototype.create = function(){
 Server.prototype.delete = function(){
 
 }
+*/
 
-/*
 room = io.of('/room/1001');
 var chatters = {};
 room.on('connection', function (socket) {
@@ -34,9 +34,7 @@ room.on('connection', function (socket) {
 
 	//返回新链接
 	socket.emit('connected', {
-		token : token,
-		row : row,
-		column : column
+		token : token
 	});
 
 	//初始化个人信息
@@ -72,4 +70,3 @@ room.on('connection', function (socket) {
 
 });
 io.listen(3001);
-*/

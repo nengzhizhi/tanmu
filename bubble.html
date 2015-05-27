@@ -1,0 +1,48 @@
+<style type="text/css">
+body{
+	font-size: 6px;
+	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;	
+}
+.stage{
+	width: 800px;
+	height: 400px;
+	margin: auto;
+	border: 1px solid rgb(195, 195, 195);
+}
+.bubble{
+	position: absolute;
+	min-width: 100px;
+	max-width: 200px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	background-color: #fff;
+	border: 4px solid #666;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	-webkit-box-shadow: 2px 2px 4px #888;
+	-moz-box-shadow: 2px 2px 4px #888;
+	box-shadow: 2px 2px 4px #888;
+	opacity: 0.8;
+}
+.bubble:before{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 40px;
+	top: 20px;
+	border: 10px solid;
+	border-color: #666 transparent transparent #666;	
+}
+</style>
+
+<div class="stage">
+	<div class="bubble" style="left:20px;top:10px;">
+		<span>好久不见啊！11111111111</span>
+	</div>
+	<div class="bubble" style="left:45px;top:20px;">
+		<span>你们还好吗！1111111111111111</span>
+	</div>	
+</div>

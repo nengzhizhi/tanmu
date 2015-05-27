@@ -44,7 +44,7 @@
 </div>
 
 <script type="text/javascript">
-	var socket = io('http://localhost:3001/room/1001');
+	var socket = io('http://localhost:3001');
 	var token = null;
 	socket.on('connected', function (data){
 		$('#code').append('<li><span>连接成功！' + data.token + '</span></li>');
@@ -61,6 +61,16 @@
 
 	socket.on('join', function (data){
 		$('#code').append('<li><span><strong>' + data.nickname + '</strong>加入房间</span></li>');			
+	})
+
+	socket.on('disconnect', function (data){
+		$('#code').append('<li><span><strong>服务器断开连接</strong></span></li>');			
+	})
+
+	socket.on('error', function (data) {
+		if (data.code == '100001') {
+			$('#code').append('<li><span><strong>用户名已被使用</strong></span></li>');	
+			}
 	})
 
 	function sendMessage(msg){
